@@ -1,0 +1,116 @@
+.preview-wrapper {
+  font-family: "Poppins", sans-serif;
+  color: #4b0082;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  /* gap: 1.5rem; */
+  padding: 1.5rem;
+}
+/* HEADER */
+.header-row {
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 10rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.preview-label {
+  font-family: "Caveat", cursive;
+  font-weight: 600;
+  font-size: 3.8rem;
+  color: #ff80dd;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.arrow-img {
+  width: 100px;
+  height: auto;
+  position: absolute;
+  bottom: -35px;
+  right: -110px;
+  z-index: 10;
+}
+
+.title {
+  font-family: "Futura Maxi CG Bold", sans-serif;
+  font-size: 4rem;
+  font-weight: 700;
+  background: linear-gradient(180deg, #eaafff, #ff80dd);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  font-family: "Caveat", cursive;
+  font-weight: 600;
+  font-size: 4rem;
+  color: #ff80dd;
+  position: relative;
+  /* margin-bottom: 1rem; */
+}
+
+.arrow {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.content {
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
+  flex-direction: row;
+}
+
+.form-side {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.upload-btn {
+  background-color: #e9c3ff;
+  border: none;
+  border-radius: 999px;
+  padding: 0.4rem 1.2rem;
+  cursor: pointer;
+  color: #fff;
+  font-weight: 600;
+}
+
+.form-side input {
+  border: 1px solid #d6caff;
+  border-radius: 999px;
+  padding: 0.4rem 1rem;
+  outline: none;
+}
+
+/* --- App preview area --- */
+.app-preview {
+  position: relative;
+  flex: 5;
+}
+
+.app-border {
+  border: 2px solid black;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 100%; /* chiều rộng gốc */
+  height: auto;
+  transform-origin: top left;
+}
+
+/* Scale toàn bộ App khi thay đổi kích thước màn hình */
+.app-scale {
+  transform: scale(var(--scale, 1));
+  transform-origin: top left;
+  transition: transform 0.2s ease;
+}

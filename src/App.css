@@ -1,11 +1,12 @@
 /* Main container */
 .squad-resume {
-  min-height: 100vh;
+  /* min-height: 100vh; */
   background: #ffffff;
-  padding: 0 30px;
+  padding: clamp(10px, 2vw, 30px);
   position: relative;
-  overflow-x: hidden;
-  gap: 20px;
+  /* overflow-x: hidden; */
+  overflow: hidden;
+  gap: clamp(10px, 1.5vw, 20px);
   display: flex;
   flex-direction: row;
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -30,7 +31,7 @@
 /* Layout sections */
 .left-section {
   position: relative;
-  margin-top: 2%;
+  /* margin-top: 2%; */
 }
 
 .right-section {
@@ -53,7 +54,7 @@
 }
 
 .photo-label {
-  font-size: 1.6rem;
+ font-size: clamp(1rem, 2vw, 1.6rem);
   display: block;
   font-family: "Brush Script MT", cursive;
   color: #8b5cf6;
@@ -87,12 +88,15 @@
 
 .profile-container {
   position: relative;
-  width: 504px;
+  width: clamp(400px, 25vw, 850px); /* min 300px, scale theo 30% width viewport, max 900px */
+  aspect-ratio: 500 / 630;
   border-radius: 25px;
-  padding: 2px; /* độ dày viền */
-  background: linear-gradient(180deg, #ff80dd, #000000); /* viền gradient */
+  padding: 2px;
+  background: linear-gradient(180deg, #ff80dd, #000000);
   box-shadow: 0 10px 40px rgba(139, 92, 246, 0.2);
   overflow: visible;
+
+  margin-bottom: clamp(40px, 5vw, 80px);
 }
 
 .image_upload_handler {
@@ -160,9 +164,9 @@
 .profile-image {
   width: 100%;
   height: 100%;
-  min-height: 700px;
   object-fit: cover;
   display: block;
+  border-radius: inherit; /* để match container */
 }
 
 .star-icon {
@@ -193,6 +197,7 @@
   left: 0;
   right: 0;
   color: white;
+  width: 100%;
   padding: 30px;
   z-index: 2;
   display: flex;
@@ -202,7 +207,7 @@
 }
 /* Tên chính */
 .profile-name {
-  font-size: 2.4rem;
+  font-size: 2.5rem;
   font-weight: 800;
   background: linear-gradient(90deg, #ffffff, #ff80dd);
   -webkit-background-clip: text;
@@ -216,9 +221,10 @@
   padding: 6px 16px;
   background: rgba(255, 255, 255, 0.15);
   border-radius: 25px;
-  font-size: 1.1rem;
+  font-size: 1.8rem;
   font-weight: 500;
   margin: 0;
+  text-wrap: nowrap;
 }
 
 /* Diamond line */
@@ -226,12 +232,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.05rem;
+  font-size: 1.8rem;
   font-weight: 600;
   color: #ffffff;
   opacity: 0.9;
   gap: 8px;
   margin-top: 4px;
+
+  text-wrap: nowrap;
 }
 
 .profile-diamond .icon img {
@@ -240,17 +248,18 @@
   object-fit: contain;
 }
 
-/* PFP section */
 .pfp-section {
   position: absolute;
-  bottom: -90px; /* nằm chéo thấp hơn khung */
-  right: -40%; /* lệch sang phải */
+  bottom: clamp(-80px, -15%, -40px);
+  /* right: clamp(-100%, -80%, -20%); */
+  right: clamp(-500px, -10%, -400px); /* không quá xa trên màn hình lớn */
   display: flex;
   flex-direction: column;
   align-items: center;
+  pointer-events: none;
   transform: rotate(-4deg);
-  z-index: 50; /* tăng hơn hẳn so với profile-container */
-  overflow: visible; /* rất quan trọng, tránh cắt arrow */
+  z-index: 50;
+  overflow: visible;
 }
 
 .pfp-label {
@@ -269,8 +278,11 @@
 /* Arrow image (xoay hướng từ chữ sang PFP) */
 .arrow-right {
   position: absolute;
-  bottom: -15%;
-  left: -90%;
+  /* bottom: -15%;
+  left: -90%; */
+  bottom: clamp(-60px, -5%, -30px);
+  left: -98%;
+  /* left: auto; */
   z-index: 9999; /* luôn cao nhất */
   pointer-events: none; /* không che vùng click upload */
 
@@ -290,18 +302,18 @@
 }
 
 .arrow-right img {
-  width: 140px; /* resize vừa phải */
-  height: auto;
+  width: clamp(60px, 8vw, 140px);
+  /* height: auto; */
   object-fit: contain;
   filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
 }
 
 .pfp-container {
   position: relative;
-  width: 249px;
-  height: 249px;
+   width: clamp(200px, 25%, 250px);
+  height: clamp(200px, 25%, 250px);
   border-radius: 25px;
-  overflow: hidden;
+  overflow: visible;
   transform: rotate(-6deg);
   transition: transform 0.3s ease;
   box-shadow: 0 8px 30px rgba(139, 92, 246, 0.3);
@@ -463,7 +475,8 @@
 /* Decorative owl */
 .decorative-owl {
   position: absolute;
-  bottom: 2%;
+  /* bottom: 2%; */
+  bottom: 0;
   right: 0;
   transform: scaleX(-1);
   z-index: 999;
@@ -472,95 +485,58 @@
 }
 
 .owl-image {
-  width: 60%;
-  height: 60%;
+  width: 70%;       /* 80% chiều rộng container cha */
+  height: 70%;      /* 80% chiều cao container cha */
+  max-width: 300px; /* giới hạn tối đa */
+  max-height: 300px;
   object-fit: contain;
 }
 
 .group_image {
-  width: 90%;
-  height: 100%;
-  /* object-fit: contain; */
+  width: clamp(800px, 80%, 900px);   /* tối thiểu 600px, scale theo 80% container, tối đa 1000px */
+  height: clamp(50%, 100%, 600px);  /* tối thiểu 400px, scale theo 100% container, tối đa 700px */
+  object-fit: contain;                /* giữ tỉ lệ ảnh */
 }
-
-/* Responsive design */
-@media (max-width: 1200px) {
-  .right-section {
-    margin-left: 350px;
+/* Media queries cho màn hình nhỏ */
+@media (max-width: 1024px) {
+  .pfp-section {
+    bottom: clamp(-70px, -5%, -35px);
+    right: clamp(-30%, -20%, -5%);
   }
-
-  .collections-grid {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .arrow-right {
+    bottom: clamp(-50px, -4%, -25px);
+    left: clamp(-100px, -10%, -50px);
+  }
+  .profile-container {
+    width: clamp(180px, 45%, 500px);
   }
 }
 
 @media (max-width: 768px) {
-  .squad-resume {
-    padding: 20px 10px;
+  .pfp-section {
+    bottom: clamp(-60px, -4%, -30px);
+    right: clamp(-25%, -15%, -5%);
   }
-
-  .main-title {
-    font-size: 2.5rem;
-    text-align: center;
-    margin-right: 0;
+  .arrow-right {
+    bottom: clamp(-40px, -3%, -20px);
+    left: clamp(-80px, -8%, -40px);
   }
-
-  .left-section {
-    position: static;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 40px;
-  }
-
-  .right-section {
-    margin-left: 0;
-  }
-
-  .collections-grid {
-    grid-template-columns: 1fr;
-    gap: 15px;
-  }
-
   .profile-container {
-    width: 250px;
-    height: 320px;
-  }
-
-  .pfp-container {
-    width: 120px;
-    height: 120px;
-    margin-left: 0;
-  }
-
-  .owl-emoji {
-    font-size: 4rem;
+    width: clamp(150px, 40%, 400px);
   }
 }
 
 @media (max-width: 480px) {
-  .main-title {
-    font-size: 2rem;
+  .pfp-section {
+    bottom: clamp(-50px, -3%, -25px);
+    right: clamp(-20%, -10%, -5%);
   }
-
+  .arrow-right {
+    bottom: clamp(-30px, -2%, -15px);
+    left: clamp(-60px, -6%, -30px);
+  }
   .profile-container {
-    width: 200px;
-    height: 260px;
-  }
-
-  .pfp-container {
-    width: 100px;
-    height: 100px;
-  }
-
-  .squad-form-section {
-    padding: 20px;
-  }
-
-  .form-row {
-    grid-template-columns: 1fr;
+    width: clamp(120px, 35%, 300px);
   }
 }
 
@@ -590,6 +566,8 @@
   filter: blur(0);
   transition: filter 0.4s ease, opacity 0.4s ease;
   opacity: 1;
+  border-radius: inherit;
+  pointer-events: auto;
 }
 
 @keyframes shimmer {
@@ -603,7 +581,6 @@
 
 .app {
   position: relative;
-  height: 100vh;
   background: #fdfdfd;
   overflow: hidden;
 }
@@ -617,6 +594,10 @@
   flex-direction: column;
   align-items: flex-end;
   z-index: 20;
+
+   /* giới hạn dropdown không làm scroll */
+  max-height: calc(100vh - 48px); /* khoảng cách trên/dưới */
+  overflow: visible; /* chỉ cho phép overflow bên trong wrapper */
 }
 
 /* --- Nút chính --- */
@@ -675,6 +656,8 @@
   animation: rippleExpand 3s linear infinite;
   z-index: 1;
   opacity: 0.6;
+   max-width: 200px;  /* hoặc tùy chỉnh */
+  max-height: 200px;
 }
 
 /* Lệch nhịp */
@@ -714,6 +697,8 @@
   align-items: flex-end;
   transition: all 0.3s ease;
   margin-top: 12px;
+   max-height: 300px; /* hoặc tùy chỉnh */
+  overflow-y: auto;   /* nếu nhiều nút thì scroll bên trong dropdown */
 }
 
 .dropdown.show {

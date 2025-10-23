@@ -9,40 +9,65 @@ import { IoCloseSharp } from "react-icons/io5";
 import domtoimage from "dom-to-image-more";
 import { saveAs } from "file-saver";
 
-function App() {
-  const [formData, setFormData] = useState({
-    role: "Medal of Honor",
-    messages: "1235",
-    favoriteEmoji: "👀💖🔥",
-    aboutMe: "Just a UI/UX designer",
-    favoriteGeneral: "Purple medal",
-    favoriteWord: "Halo, G10k",
-  });
+interface FormData {
+  role: string;
+  messages: string;
+  favoriteEmoji: string;
+  aboutMe?: string;
+  favoriteGeneral?: string;
+  favoriteWord?: string;
+}
+
+interface Images {
+  profileImage: string;
+  pfpImage: string;
+  collection1?: string;
+  collection2?: string;
+  collection3?: string;
+  collection4?: string;
+}
+
+interface AppProps {
+  formData: FormData;
+  images: Images;
+  onFormDataChange: (data: FormData) => void;
+  onImagesChange: (images: Images) => void;
+}
+
+function App({ formData, images, onFormDataChange, onImagesChange }: AppProps) {
+  // const [formData, setFormData] = useState({
+  //   role: "Medal of Honor",
+  //   messages: "1235",
+  //   favoriteEmoji: "👀💖🔥",
+  //   aboutMe: "Just a UI/UX designer",
+  //   favoriteGeneral: "Purple medal",
+  //   favoriteWord: "Halo, G10k",
+  // });
 
   const [open, setOpen] = useState(false);
 
-  const [images, setImages] = useState({
-    profileImage: "/main_photo.png",
-    pfpImage: "/10k-squd-avatar.png",
-    collection1:
-      "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=220&h=160&fit=crop",
-    collection2:
-      "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=220&h=160&fit=crop",
-    collection3:
-      "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=220&h=160&fit=crop",
-    collection4:
-      "https://images.unsplash.com/photo-1446776877081-d282a0f896e2?w=220&h=160&fit=crop",
-  });
+  // const [images, setImages] = useState({
+  //   profileImage: "/main_photo.png",
+  //   pfpImage: "/10k-squd-avatar.png",
+  //   collection1:
+  //     "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=220&h=160&fit=crop",
+  //   collection2:
+  //     "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=220&h=160&fit=crop",
+  //   collection3:
+  //     "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=220&h=160&fit=crop",
+  //   collection4:
+  //     "https://images.unsplash.com/photo-1446776877081-d282a0f896e2?w=220&h=160&fit=crop",
+  // });
 
   const fileInputRefs = useRef<{ [key: string]: HTMLInputElement | null }>({});
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+  // const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const { name, value } = e.target;
+  //   setFormData((prev) => ({
+  //     ...prev,
+  //     [name]: value,
+  //   }));
+  // };
 
   const handleImageClick = (imageKey: string) => {
     const fileInput = fileInputRefs.current[imageKey];
@@ -51,36 +76,75 @@ function App() {
     }
   };
 
-  const handleImageUpload = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    imageKey: string
-  ) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        const result = event.target?.result as string;
-        setImages((prev) => ({
-          ...prev,
-          [imageKey]: result,
-        }));
-      };
-      reader.readAsDataURL(file);
-    }
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    onFormDataChange({ ...formData, [name]: value });
   };
+
+  const handleImageChange = (key: keyof Images, value: string) => {
+    onImagesChange({ ...images, [key]: value });
+  };
+
+  // const handleImageUpload = (
+  //   e: React.ChangeEvent<HTMLInputElement>,
+  //   imageKey: string
+  // ) => {
+  //   const file = e.target.files?.[0];
+  //   if (file) {
+  //     const reader = new FileReader();
+  //     reader.onload = (event) => {
+  //       const result = event.target?.result as string;
+  //       setImages((prev) => ({
+  //         ...prev,
+  //         [imageKey]: result,
+  //       }));
+  //     };
+  //     reader.readAsDataURL(file);
+  //   }
+  // };
+
+  const handleImageUpload = (
+  e: React.ChangeEvent<HTMLInputElement>,
+  imageKey: keyof Images
+) => {
+  const file = e.target.files?.[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const result = event.target?.result as string;
+      handleImageChange(imageKey, result); // cập nhật qua props
+    };
+    reader.readAsDataURL(file);
+  }
+};
 
   const appRef = useRef<HTMLDivElement>(null);
 
-  const handleDownload = () => {
-    if (!appRef.current) return;
-    domtoimage
-      .toBlob(appRef.current)
-      .then((blob: any) => {
-        setOpen(false);
-        saveAs(blob, "profile.png");
-      })
-      .catch((err: any) => console.error(err));
-  };
+ const handleDownload = async () => {
+  if (!appRef.current) return;
+  const node = appRef.current;
+
+  try {
+    const scaleX = 1920 / node.offsetWidth;
+    const scaleY = 1080 / node.offsetHeight;
+
+    const dataUrl = await domtoimage.toPng(node, {
+      width: 1920,
+      height: 1080,
+      style: {
+        transform: `scale(${scaleX}, ${scaleY})`,
+        transformOrigin: "top left",
+      },
+      quality: 1,
+      bgcolor: "#ffffff", // nền trắng
+    });
+
+    saveAs(dataUrl, "profile.png");
+    setOpen(false);
+  } catch (err) {
+    console.error(err);
+  }
+};
 
   return (
     <>
@@ -161,13 +225,14 @@ function App() {
                     accept="image/*"
                     style={{ display: "none" }}
                   />
-                </div>
-
-                <div className="arrow-right">
+                   <div className="arrow-right">
                   <div className="pfp-label handwritten">My pfp</div>
                   <img src="/arrow_left.png" alt="Arrow Right" />
                 </div>
               </div>
+                </div>
+
+               
             </div>
           </div>
         </div>
@@ -279,13 +344,9 @@ function App() {
           </button>
 
           <div className={`dropdown ${open ? "show" : ""}`}>
-            <button className="dropdown-btn">
-              <FaShare className="dropdown-icon" />
-              <span>Chia sẻ</span>
-            </button>
             <button className="dropdown-btn" onClick={handleDownload}>
               <FaDownload className="dropdown-icon" />
-              <span>Tải xuống</span>
+              <span>Download</span>
             </button>
           </div>
         </div>

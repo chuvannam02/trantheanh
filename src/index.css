@@ -17,7 +17,7 @@
 }
 .form-container {
   display: grid;
-  margin-left: 250px;
+  margin-left: clamp(100px, 15%, 400px);
   grid-template-columns: 1fr 1fr 1fr;
   gap: 16px 50px; /* row gap / column gap */
   align-items: start;
@@ -65,8 +65,10 @@
   background: white;
   border: 1px solid #8b5cf6;
   border-radius: 60px; /* pill */
-  padding: 10px 20px;
-  font-size: 22px;
+  /* padding: 10px 20px; */
+  /* font-size: 22px; */
+  padding: clamp(8px, 0.7vw, 16px) clamp(16px, 1.2vw, 30px); /* padding top/bottom và left/right */
+  font-size: clamp(18px, 1.2vw, 20px);
   color: #111827;
   outline: none;
   transition: all 0.18s ease;
