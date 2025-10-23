@@ -1,7 +1,10 @@
 import { useState, useRef } from "react";
 import "./App.css";
 import LazyImage from "./LazyImage";
-import { FaBars, FaTimes, FaShareAlt, FaDownload } from "react-icons/fa";
+// import { FaBars, FaTimes, FaShareAlt, FaDownload } from "react-icons/fa";
+import { FaBars, FaShare, FaDownload } from "react-icons/fa6";
+import { IoCloseSharp } from "react-icons/io5";
+
 // @ts-ignore
 import domtoimage from "dom-to-image-more";
 import { saveAs } from "file-saver";
@@ -272,12 +275,12 @@ function App() {
             <span className="ripple ripple2"></span>
             <span className="ripple ripple3"></span>
 
-            <span className="icon">{open ? <FaTimes /> : <FaBars />}</span>
+            <span className="icon">{open ? <IoCloseSharp /> : <FaBars />}</span>
           </button>
 
           <div className={`dropdown ${open ? "show" : ""}`}>
             <button className="dropdown-btn">
-              <FaShareAlt className="dropdown-icon" />
+              <FaShare className="dropdown-icon" />
               <span>Chia sẻ</span>
             </button>
             <button className="dropdown-btn" onClick={handleDownload}>
