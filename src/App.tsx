@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import "./App.css";
 import LazyImage from "./LazyImage";
 // import { FaBars, FaTimes, FaShareAlt, FaDownload } from "react-icons/fa";
-import { FaBars, FaShare, FaDownload } from "react-icons/fa6";
+import { FaBars, FaDownload } from "react-icons/fa6";
 import { IoCloseSharp } from "react-icons/io5";
 
 // @ts-ignore

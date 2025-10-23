@@ -2,6 +2,24 @@ import React, { useState, useRef } from "react";
 import App from "./App";
 import "./Container.css";
 
+interface FormData {
+  role: string;
+  messages: string;
+  favoriteEmoji: string;
+  aboutMe?: string;
+  favoriteGeneral?: string;
+  favoriteWord?: string;
+}
+
+interface Images {
+  profileImage: string;
+  pfpImage: string;
+  collection1?: string;
+  collection2?: string;
+  collection3?: string;
+  collection4?: string;
+}
+
 const Container: React.FC = () => {
   const [formData, setFormData] = useState({
     role: "Medal of Honor",
@@ -76,7 +94,9 @@ const Container: React.FC = () => {
             type="file"
             accept="image/*"
             style={{ display: "none" }}
-            ref={(el) => (fileInputRefs.current["profileImage"] = el)}
+            ref={(el) => {
+              fileInputRefs.current["profileImage"] = el;
+            }}
             onChange={(e) => handleImageUpload(e, "profileImage")}
           />
 
@@ -91,7 +111,9 @@ const Container: React.FC = () => {
             type="file"
             accept="image/*"
             style={{ display: "none" }}
-            ref={(el) => (fileInputRefs.current["pfpImage"] = el)}
+            ref={(el) => {
+              fileInputRefs.current["pfpImage"] = el; // chỉ gán thôi, không return
+            }}
             onChange={(e) => handleImageUpload(e, "pfpImage")}
           />
 
@@ -133,8 +155,12 @@ const Container: React.FC = () => {
               <App
                 formData={formData}
                 images={images}
-                onFormDataChange={setFormData}
-                onImagesChange={setImages}
+                onFormDataChange={(data: FormData) =>
+                  setFormData((prev) => ({ ...prev, ...data }))
+                }
+                onImagesChange={(imgs: Images) =>
+                  setImages((prev) => ({ ...prev, ...imgs }))
+                }
               />
             </div>
           </div>
