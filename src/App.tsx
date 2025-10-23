@@ -22,8 +22,8 @@ function App() {
   const [open, setOpen] = useState(false);
 
   const [images, setImages] = useState({
-    profileImage: "../public/main_photo.png",
-    pfpImage: "../public/10k-squd-avatar.png",
+    profileImage: "/main_photo.png",
+    pfpImage: "/10k-squd-avatar.png",
     collection1:
       "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=220&h=160&fit=crop",
     collection2:
@@ -92,7 +92,7 @@ function App() {
             <div className="profile-container">
               <div className="photo-top">
                 <div className="arrow-down">
-                  <img src="../public/arrow_down.png" alt="Arrow Down" />
+                  <img src="/arrow_down.png" alt="Arrow Down" />
                 </div>
               </div>
 
@@ -129,7 +129,7 @@ function App() {
                   <p className="profile-age">(vibe) Age: 23</p>
                   <p className="profile-diamond">
                     <span className="icon">
-                      <img src="../public/hole_icon.png" alt="Diamond Icon" />
+                      <img src="/hole_icon.png" alt="Diamond Icon" />
                     </span>
                     10.101010 MON
                   </p>
@@ -165,7 +165,7 @@ function App() {
 
                 <div className="arrow-right">
                   <div className="pfp-label handwritten">My pfp</div>
-                  <img src="../public/arrow_left.png" alt="Arrow Right" />
+                  <img src="/arrow_left.png" alt="Arrow Right" />
                 </div>
               </div>
             </div>
@@ -179,7 +179,7 @@ function App() {
             <div className="collections-title">Recent Collections</div>
             <div className="collections-grid">
               <img
-                src="../public/Group_1.png"
+                src="/Group_1.png"
                 className="group_image"
                 alt="group"
               />
