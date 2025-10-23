@@ -1,0 +1,220 @@
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+.form-container {
+  display: grid;
+  margin-left: 250px;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px 50px; /* row gap / column gap */
+  align-items: start;
+}
+
+/* make a group span full width of the grid */
+.form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.first-element {
+  grid-column: 1 / 2; /* bắt đầu ở line 1, kết thúc ở line 2 */
+  grid-row: 1; /* dòng 1 */
+}
+
+.second-element {
+  grid-column: 2 / 4; /* bắt đầu ở line 2, kết thúc ở line 3 */
+  grid-row: 1 / 2; /* dòng 1 */
+}
+
+.fouth-element {
+  grid-column: 2 / 3; /* bắt đầu ở line 1, kết thúc ở line cuối cùng */
+  grid-row: 2 / 3; /* dòng 2 */
+}
+
+.fifth-element {
+  grid-column: 1 / 2; /* bắt đầu ở line 1, kết thúc ở line cuối cùng */
+  grid-row: 3 / 4; /* dòng 2 */
+}
+
+.sixth-element {
+  grid-column: 2 / 3; /* bắt đầu ở line 1, kết thúc ở line cuối cùng */
+  grid-row: 3 / 4; /* dòng 2 */
+}
+
+/* label styling */
+.form-label {
+  color: #1f2937;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+/* pill style input */
+.input-field {
+  background: white;
+  border: 1px solid #8b5cf6;
+  border-radius: 60px; /* pill */
+  padding: 10px 20px;
+  font-size: 22px;
+  color: #111827;
+  outline: none;
+  transition: all 0.18s ease;
+  width: 100%;
+  box-sizing: border-box;
+  height: auto;
+  display: inline-flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.input-field:focus {
+  border-color: #a855f7;
+  box-shadow: 0 6px 24px rgba(168, 85, 247, 0.08);
+  transform: translateY(-2px);
+}
+
+.btn {
+  background: linear-gradient(135deg, #ff69b4, #8b5cf6);
+  color: white;
+  border: none;
+  border-radius: 15px;
+  padding: 12px 24px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 105, 180, 0.4);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn-small {
+  padding: 8px 16px;
+  font-size: 12px;
+  border-radius: 8px;
+  width: 100%;
+  background: linear-gradient(135deg, #ec4899, #ff69b4);
+  color: white;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-small:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(236, 72, 153, 0.4);
+}
+
+/* Handwritten font style */
+.handwritten {
+  font-family: "Brush Script MT", cursive;
+  font-style: italic;
+  color: #8b5cf6;
+  font-weight: 500;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #8b5cf6, #ec4899);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+}
+
+/* Card styles */
+.card {
+  background: white;
+  border-radius: 16px 16px 8px 8px;
+  padding: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Collection card specific styles */
+.collection-card {
+  background: white;
+  border-radius: 16px 16px 8px 8px;
+  padding: 0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  transform: rotate(-2deg);
+}
+
+.collection-card:nth-child(2) {
+  transform: rotate(1deg);
+}
+
+.collection-card:nth-child(3) {
+  transform: rotate(-1deg);
+}
+
+.collection-card:nth-child(4) {
+  transform: rotate(2deg);
+}
+
+.collection-card:hover {
+  transform: rotate(0deg) translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.collection-image {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 16px 16px 0 0;
+}
+
+.collection-content {
+  padding: 12px;
+}
+
+.collection-title {
+  font-weight: 700;
+  color: #1f2937;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.collection-supply {
+  color: #6b7280;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.collection-number {
+  color: #6b7280;
+  font-size: 12px;
+  margin-bottom: 12px;
+}
